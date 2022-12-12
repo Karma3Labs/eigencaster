@@ -12,12 +12,11 @@ export default function Search({ data, query }) {
   return (
     <>
       <Head>
-        <title>Search profiles on Farcaster</title>
+        <title>Farcaster Recommender</title>
         <meta
           property="og:image"
-          content={`https://searchcaster.xyz/api/og/search?text=${
-            query?.q || 'Search for profiles on Farcaster'
-          }`}
+          content={`https://searchcaster.xyz/api/og/search?text=${query?.address || 'Search for profiles on Farcaster'
+            }`}
         />
       </Head>
 
@@ -29,10 +28,10 @@ export default function Search({ data, query }) {
             <div className="input-wrapper">
               <input
                 type="text"
-                name="q"
-                id="q"
-                placeholder="Search by bio or username"
-                defaultValue={query.q}
+                name="address"
+                id="address"
+                placeholder="Enter your address"
+                defaultValue={query.address}
               />
               <button type="submit">{arrowIcon}</button>
             </div>

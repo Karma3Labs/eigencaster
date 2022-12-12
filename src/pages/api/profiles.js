@@ -1,53 +1,19 @@
-import { ethers } from 'ethers'
-import supabase from '../../lib/db'
-
-const provider = new ethers.providers.InfuraProvider(
-  'homestead',
-  process.env.INFURA_API_KEY
-)
+import axios from 'axios'
 
 export async function searchProfiles(query) {
-  let { address, bio, connected_address, username, q } = query
-  let profiles = []
+  let { address } = query
+  let profiles = { data: [] }
 
   if (address) {
-    profiles = await supabase
-      .from('profiles')
-      .select()
-      .ilike('address', address)
-  } else if (q) {
-    profiles = await supabase
-      .from('profiles')
-      .select('*')
-      .or(`username.ilike.%${q}%, bio.ilike.%${q}%, display_name.ilike.%${q}%`)
-      .order('followers', { ascending: false })
-  } else if (bio) {
-    profiles = await supabase.from('profiles').select().ilike('bio', `%${bio}%`)
-  } else if (connected_address) {
-    // If param isn't an ETH address, check if it's an ENS name
-    if (
-      connected_address.length !== 42 ||
-      connected_address.substring(0, 2) !== '0x'
-    ) {
-      connected_address = await provider.resolveName(connected_address)
+    try {
+      profiles = await axios.get(`http://localhost:8080/suggest_profiles?address=${address}`)
     }
-
-    if (!connected_address) {
+    catch (e) {
       return {
-        error: 'Invalid connected_address',
+        error: "Server failed to suggest"
       }
     }
-
-    profiles = await supabase
-      .from('profiles')
-      .select('*')
-      .ilike('connected_address', connected_address)
-  } else if (username) {
-    profiles = await supabase.from('profiles').select('*').match({ username })
-  } else {
-    return {
-      error: 'Missing address, bio, connected_address, or username parameter',
-    }
+    console.log(profiles)
   }
 
   const formattedProfiles = profiles.data.map((p) => {
@@ -56,16 +22,16 @@ export async function searchProfiles(query) {
         id: p.id,
         address: p.address,
         username: p.username,
-        displayName: p.display_name,
+        displayName: p.displayName,
         bio: p.bio,
         followers: p.followers,
         following: p.following,
-        avatarUrl: p.avatar_url,
-        isVerifiedAvatar: p.avatar_verified,
+        avatarUrl: p.avatarUrl || 'url',
+        isVerifiedAvatar: p.avatarVerified,
         proofUrl: `https://api.farcaster.xyz/v1/verified_addresses/${p.address}`,
         registeredAt: new Date(p.registered_at).getTime(),
       },
-      connectedAddress: p.connected_address,
+      connectedAddress: p.connectedAddress,
     }
   })
 
@@ -74,7 +40,7 @@ export async function searchProfiles(query) {
 
 export default async function handler(req, res) {
   try {
-    res.json(await searchProfiles(req.query))
+    res.json(await searchProfiles(req.address))
   } catch (err) {
     console.error(err)
     res.status(500).json({ error: err.message })
