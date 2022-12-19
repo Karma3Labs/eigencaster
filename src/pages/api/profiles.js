@@ -19,7 +19,7 @@ export async function searchProfiles(query) {
   const formattedProfiles = profiles.data.map((p) => {
     return {
       body: {
-        id: p.id,
+        id: p.fid,
         address: p.address,
         username: p.username,
         displayName: p.displayName,

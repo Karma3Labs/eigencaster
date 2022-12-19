@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useStorage } from '../hooks/useLocalStorage'
-
 import { arrowIcon } from '../assets/icons'
 
 type SearchInputProps = {
