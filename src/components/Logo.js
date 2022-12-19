@@ -16,7 +16,7 @@ export default function Logo({ align, size, ...props }) {
               alt="Farcaster logo"
             />
           </div>
-          <h1>Farcaster Recommender</h1>
+          <h1>Eigentrust Recommender</h1>
         </div>
 
         <style jsx>{`
@@ -40,7 +40,7 @@ export default function Logo({ align, size, ...props }) {
           }
 
           h1 {
-            font-size: ${size === 'lg' ? '2.5rem' : '1.5rem'};
+            font-size: ${size === 'lg' ? '1.5rem' : '1.5rem'};
             color: #fff;
 
             @media screen and (max-width: 30em) {
