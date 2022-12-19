@@ -6,7 +6,7 @@ export async function searchProfiles(query) {
 
   if (address) {
     try {
-      profiles = await axios.get(`http://localhost:8080/suggest_profiles?address=${address}`)
+      profiles = await axios.get(`${process.env.API_URL}/suggest_profiles?address=${address}`)
     }
     catch (e) {
       return {
