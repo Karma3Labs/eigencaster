@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { usePlausible } from 'next-plausible'
 import { useRouter } from 'next/router'
 import { useStorage } from '../hooks/useLocalStorage'
 import { arrowIcon } from '../assets/icons'
