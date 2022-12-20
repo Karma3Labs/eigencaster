@@ -3,6 +3,7 @@ import { usePlausible } from 'next-plausible'
 import { useRouter } from 'next/router'
 import { useStorage } from '../hooks/useLocalStorage'
 import { arrowIcon } from '../assets/icons'
+import { profile } from 'console'
 
 type SearchInputProps = {
   size: 'lg' | undefined
@@ -35,11 +36,19 @@ export default function SearchInput({ size, ...props }: SearchInputProps) {
 
   function handleFormSubmit(e: any) {
     e.preventDefault()
+
+    const nativeEvent = e.nativeEvent as SubmitEvent
+    const target = nativeEvent.submitter?.getAttribute('name')
     let query: SearchQuery = {
       address: e.target!.text?.value,
     }
-
-    router.push(`/profiles?address=${query.address}`)
+    
+    if (target == 'profiles') {
+      router.push(`/profiles?address=${query.address}`)
+    }
+    else {
+      router.push(`/search?address=${query.address}`)
+    }
   }
 
   return (
@@ -53,12 +62,31 @@ export default function SearchInput({ size, ...props }: SearchInputProps) {
               defaultValue={sessionQuery?.address || ''}
               onChange={(e) => setBasicText(e.target.value)}
             />
-            <input type="hidden" name="username" />
-            <button type="submit">{arrowIcon}</button>
+          </div>
+          <div className="submit_buttons">
+            <button type="submit" className="action_btn" name="profiles" value="lala1" >Search profiles</button>
+            <button type="submit" className="action_btn" name="casts" value="lala2">Search casts</button>
           </div>
       </form>
 
       <style jsx>{`
+        .submit_buttons {
+          margin-top: 40px;
+          display: flex;
+          justify-content: space-between;
+        }
+          
+        .action_btn {
+          width: 150px;
+          margin: 0 auto;
+          display: inline;
+
+          gap: 0.75rem;
+          padding: 0.75rem;
+          border-radius: 0.5rem;
+          background-color: #413656;
+        }
+
         .input-wrapper {
           display: flex;
           background-color: #4d4063;
@@ -123,6 +151,7 @@ export default function SearchInput({ size, ...props }: SearchInputProps) {
             transform: translate(0.03125rem, -0.0625rem);
           }
         }
+
       `}</style>
     </>
   )

@@ -11,23 +11,23 @@ export function formatCasts(casts) {
 
     return {
       body: {
-        publishedAt: new Date(cast.published_at).getTime(),
+        publishedAt: new Date(cast.publishedAt).getTime(),
         username: cast.username,
         data: {
           text: text,
           image: attachment,
-          replyParentMerkleRoot: cast.reply_parent_merkle_root,
-          threadMerkleRoot: cast.thread_merkle_root,
+          replyParentMerkleRoot: cast.replyParentMerkleRoot,
+          threadMerkleRoot: cast.threadMerkleRoot,
         },
       },
       meta: {
-        displayName: cast.display_name,
-        avatar: cast.avatar_url?.replace(
+        displayName: cast.displayName,
+        avatar: cast.avatarUrl?.replace(
           'https://storage.opensea.io/',
           'https://openseauserdata.com/'
         ),
-        isVerifiedAvatar: cast.avatar_verified,
-        numReplyChildren: cast.num_reply_children || 0,
+        isVerifiedAvatar: cast.avatarVerified,
+        numReplyChildren: cast.numReplyChildren || 0,
         reactions: {
           count: cast.reactions || 0,
           type: 'Like',
@@ -39,12 +39,11 @@ export function formatCasts(casts) {
           count: cast.watches || 0,
         },
         replyParentUsername: {
-          username: cast.reply_parent_username,
+          username: cast.replyParentUsername,
         },
         mentions: cast.mentions,
       },
-      merkleRoot: cast.merkle_root,
-      uri: `farcaster://casts/${cast.merkle_root}/${cast.thread_merkle_root}`,
+      uri: `farcaster://casts/${cast.merkleRoot}/${cast.threadMerkleRoot}`,
     }
   })
 }
@@ -60,13 +59,12 @@ export function formatCastText(text, searchQuery) {
       text = text.replace(
         link,
         // If a link doesn't already start with http:// or https://, add it
-        `<a href="${
-          link.match(
-            // Regex to identify an ENS name
-            /^(?!(http|https))(.*)\.eth$/
-          )
-            ? `https://rainbow.me/${link}`
-            : link.startsWith('http')
+        `<a href="${link.match(
+          // Regex to identify an ENS name
+          /^(?!(http|https))(.*)\.eth$/
+        )
+          ? `https://rainbow.me/${link}`
+          : link.startsWith('http')
             ? link
             : `https://${link}`
         }" target="_blank" rel="noopener">${link}</a>`

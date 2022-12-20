@@ -1,11 +1,9 @@
 import Head from 'next/head'
-
 import { searchCasts } from './api/search'
 import CastFeed from '../components/CastFeed'
 import Container from '../components/Container'
 import Footer from '../components/Footer'
 import Logo from '../components/Logo'
-import SearchFilters from '../components/SearchFilters'
 import SearchInput from '../components/SearchInput'
 
 export default function Search({ data, query }) {
@@ -15,21 +13,13 @@ export default function Search({ data, query }) {
     <>
       <Head>
         <title>
-          {query.text ? `${query.text} - Searchcaster` : 'Searchcaster'}
+          {query.address ? `${query.address} - Searchcaster` : 'Searchcaster'}
         </title>
-        {query.merkleRoot ? (
-          <meta
-            property="og:image"
-            content={`https://og.farcase.xyz/cast/${query.merkleRoot}`}
-          />
-        ) : (
-          <meta
-            property="og:image"
-            content={`https://searchcaster.xyz/api/og/search?text=${
-              query?.text || ''
+        <meta
+          property="og:image"
+          content={`https://searchcaster.xyz/api/og/search?text=${query?.text || ''
             }`}
-          />
-        )}
+        />
       </Head>
 
       <Container>
@@ -41,11 +31,8 @@ export default function Search({ data, query }) {
               <span className="header__page-number">Page {query.page}</span>
             )}
           </div>
-
-          <SearchInput />
         </div>
 
-        {!query.merkleRoot && <SearchFilters query={query} />}
         <CastFeed casts={casts} query={query} />
       </Container>
 

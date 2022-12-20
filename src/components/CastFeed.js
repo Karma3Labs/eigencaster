@@ -12,8 +12,8 @@ export default function CastFeed({ casts, query }) {
   const urlToNextPage = query.page
     ? url.replace(/page=\d+/, `page=${page + 1}`)
     : url.includes('?')
-    ? `${url}&page=2`
-    : `${url}?page=2`
+      ? `${url}&page=2`
+      : `${url}?page=2`
 
   const urlToPrevPage =
     query.page && url.replace(/page=\d+/, `page=${page - 1}`)

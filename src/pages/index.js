@@ -65,6 +65,22 @@ export default function Home() {
           gap: 1rem;
           min-height: 100vh;
         }
+        .submit_buttons {
+          margin-top: 40px;
+          display: flex;
+          justify-content: space-between;
+        }
+          
+        .action_btn {
+          width: 150px;
+          margin: 0 auto;
+          display: inline;
+
+          gap: 0.75rem;
+          padding: 0.75rem;
+          border-radius: 0.5rem;
+          background-color: #413656;
+        }
       `}</style>
     </>
   )
