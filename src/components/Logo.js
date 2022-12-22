@@ -16,7 +16,7 @@ export default function Logo({ align, size, ...props }) {
               alt="Farcaster logo"
             />
           </div>
-          <h1>Eigentrust Recommender</h1>
+          <h1>Eigencaster</h1>
         </div>
 
         <style jsx>{`

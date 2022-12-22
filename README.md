@@ -1,3 +1,5 @@
+# Eigencaster
+
 Eigencaster is a frontend that
 accepts a Farcaster user (address) and
 displays casts by people not already followed by the given user,
