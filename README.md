@@ -3,6 +3,9 @@ accepts a Farcaster user (address) and
 displays casts by people not already followed by the given user,
 using the EigenTrust algorithm to determine the people to display.
 
+Eigencaster is based on
+[Searchcaster](https://github.com/gskril/searchcaster).
+
 ## Set up an all-in-one local environment
 
 ### Run a local PostgreSQL server with Farcaster crawled data
