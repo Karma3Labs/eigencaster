@@ -1,10 +1,6 @@
 import { useEffect, useState } from 'react'
-import { usePlausible } from 'next-plausible'
 import { useRouter } from 'next/router'
 import { useStorage } from '../hooks/useLocalStorage'
-import { arrowIcon } from '../assets/icons'
-import { profile } from 'console'
-import { isAddress } from 'ethers/lib/utils'
 
 type SearchInputProps = {
   size: 'lg' | undefined
@@ -55,7 +51,7 @@ export default function SearchInput({ size, ...props }: SearchInputProps) {
             <input
               type="text"
               name="text"
-              placeholder={mounted ? 'Enter your farcaster address' : ''}
+              placeholder={mounted ? 'Farcaster address or username' : ''}
               defaultValue={sessionQuery?.address || ''}
               onChange={(e) => setBasicText(e.target.value)}
             />

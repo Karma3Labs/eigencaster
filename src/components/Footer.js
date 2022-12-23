@@ -1,33 +1,23 @@
 import Link from 'next/link'
 import Container from './Container'
 
-export default function Footer({ includeTime = true }) {
+export default function Footer({ includeTime = false }) {
   return (
     <>
       <Container size="full">
         <div className="footer">
           <div className="footer-links footer__left">
-            <p>{includeTime ? 'Updates every 30 minutes' : 'Searchcaster'}</p>
+            <p>{includeTime ? 'Updates every  minutes' : 'Eigencaster'}</p>
           </div>
           <div className="footer-links footer__right">
-            <Link href="/docs">
-              <a className="footer-link">API</a>
-            </Link>
-            <Link href="/profiles">
-              <a className="footer-link">Profiles</a>
-            </Link>
-            <Link href="https://www.raycast.com/gregskril/searchcaster">
-              <a className="footer-link" target="_blank" rel="noreferrer">
-                Raycast
-              </a>
-            </Link>
+            <p>Inspired from</p>
             <a
               className="footer-link"
               href="https://github.com/gskril/searchcaster"
               target="_blank"
               rel="noreferrer"
             >
-              GitHub
+              Searchcaster
             </a>
           </div>
         </div>
@@ -40,17 +30,21 @@ export default function Footer({ includeTime = true }) {
           gap: 0.75rem;
           width: 100%;
           padding-top: 1.25rem;
-          padding-bottom: 1.25rem;
+          padding-bottom: 0.25rem;
           align-items: center;
           color: #9584a7;
 
           &-links {
             display: flex;
-            gap: 1.5rem;
+            gap: 0.3rem;
           }
 
           &__left {
             opacity: 0.5;
+          }
+
+          &__right {
+            padding-top: 25px;
           }
 
           @media (min-width: 768px) {
@@ -66,7 +60,7 @@ export default function Footer({ includeTime = true }) {
           }
 
           a {
-            color: inherit;
+            color: #e3e1de;
 
             &:hover,
             &:focus-visible {
