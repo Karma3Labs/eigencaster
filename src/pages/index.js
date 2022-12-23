@@ -32,7 +32,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Searchcaster</title>
+        <title>Eigencater</title>
         <meta
           property="og:image"
           content="https://searchcaster.xyz/api/og/search"

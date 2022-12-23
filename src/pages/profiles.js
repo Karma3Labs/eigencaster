@@ -15,7 +15,7 @@ export default function Search({ data, query }) {
         <title>Farcaster Recommender</title>
         <meta
           property="og:image"
-          content={`https://searchcaster.xyz/api/og/search?text=${query?.address || 'Search for profiles on Farcaster'
+          content={`https://searchcaster.xyz/api/og/search?text=${query?.address || 'Eigencaster'
             }`}
         />
       </Head>

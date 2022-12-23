@@ -12,7 +12,7 @@ export default function Search({ data, query }) {
     <>
       <Head>
         <title>
-          {query.address ? `${query.address} - Searchcaster` : 'Searchcaster'}
+          {query.address ? `${query.address} - Eigencaster` : 'Eigencaster'}
         </title>
         <meta
           property="og:image"

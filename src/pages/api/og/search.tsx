@@ -59,7 +59,7 @@ export default async function handler(req: NextRequest) {
                 padding: '0 0 0 10px',
               }}
             >
-              Searchcaster
+              Eigencaster
             </h1>
           </div>
 
