@@ -63,21 +63,34 @@ export default function Search({ data, query }) {
                       @{profile.body?.username}
                     </a>
                   </div>
+                  {profile.isFollowed && <div><p className='isFollowed'>followed</p></div>}
                 </div>
                 <p>{profile.body?.bio}</p>
               </div>
             ))}
           </div>
-        )}
-      </Container>
+        )
+        }
+      </Container >
 
       {data.length > 10 && <Footer />}
 
-      <style jsx>{`
+      < style jsx > {`
         .header {
           display: flex;
           flex-direction: column;
           padding: 3rem 0 2rem;
+        }
+
+        .isFollowed {
+          width: 150px;
+          margin: 0 auto;
+          display: inline;
+
+          gap: 0rem;
+          padding: 0.1rem 0.4rem;
+          border-radius: 0.3rem;
+          background-color: #413656;
         }
 
         .input-wrapper {
@@ -170,7 +183,7 @@ export default function Search({ data, query }) {
             opacity: 0.5;
           }
         }
-      `}</style>
+      `}</style >
     </>
   )
 }
