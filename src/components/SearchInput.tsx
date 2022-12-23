@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { useStorage } from '../hooks/useLocalStorage'
 import { arrowIcon } from '../assets/icons'
 import { profile } from 'console'
+import { isAddress } from 'ethers/lib/utils'
 
 type SearchInputProps = {
   size: 'lg' | undefined
@@ -11,6 +12,7 @@ type SearchInputProps = {
 
 export type SearchQuery = {
   address: string
+  username: string
 }
 
 export default function SearchInput({ size, ...props }: SearchInputProps) {
@@ -39,16 +41,11 @@ export default function SearchInput({ size, ...props }: SearchInputProps) {
 
     const nativeEvent = e.nativeEvent as SubmitEvent
     const target = nativeEvent.submitter?.getAttribute('name')
-    let query: SearchQuery = {
-      address: e.target!.text?.value,
-    }
-    
-    if (target == 'profiles') {
-      router.push(`/profiles?address=${query.address}`)
-    }
-    else {
-      router.push(`/search?address=${query.address}`)
-    }
+
+    const path = target == 'profiles' ? 'profiles' : 'search'
+    const value = e.target!.text?.value
+
+    router.push(`/${path}?search=${value}`)
   }
 
   return (

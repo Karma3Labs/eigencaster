@@ -1,18 +1,26 @@
 import axios from 'axios'
+import { isAddress } from 'ethers/lib/utils'
 
 export async function searchProfiles(query) {
-  let { address } = query
   let profiles = { data: [] }
+  console.log(query)
+  if ('search' in query) {
+    if (isAddress(query.search)) {
+      query = { address: query.search }
+    }
+    else {
+      query = { username: query.search }
+    }
+  }
 
-  if (address) {
-    try {
-      profiles = await axios.get(`${process.env.API_URL}/suggest_profiles?address=${address}`)
-    }
-    catch (e) {
-      return {
-        error: "Server failed to suggest"
-      }
-    }
+  try {
+    profiles = await axios.get(`${process.env.API_URL}/suggest_profiles`, {
+      params: query
+    })
+  }
+  catch (e) {
+    console.log(`[PROFILES] Error: ${e} for query:`, query)
+    profiles.data = []
   }
 
   const formattedProfiles = profiles.data.map((p) => {

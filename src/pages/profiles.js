@@ -28,10 +28,10 @@ export default function Search({ data, query }) {
             <div className="input-wrapper">
               <input
                 type="text"
-                name="address"
-                id="address"
+                name="search"
+                id="search"
                 placeholder="Enter your address"
-                defaultValue={query.address}
+                defaultValue={query.address || query.username}
               />
               <button type="submit">{arrowIcon}</button>
             </div>

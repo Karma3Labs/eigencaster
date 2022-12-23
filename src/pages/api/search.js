@@ -1,21 +1,28 @@
 import axios from 'axios'
-import supabase from '../../lib/db'
 import { formatCasts } from '../../utils/cast'
+import { isAddress } from 'ethers/lib/utils'
 
 export async function searchCasts(query) {
   const startTime = Date.now()
-
-  const { address } = query
   let casts = []
 
+  if ('search' in query) {
+    if (isAddress(query.search)) {
+      query = { address: query.search }
+    }
+    else {
+      query = { username: query.search }
+    }
+  }
+
   try {
-    casts = await axios.get(`${process.env.API_URL}/suggest_casts?address=${address}`)
+    casts = await axios.get(`${process.env.API_URL}/suggest_casts`, {
+      params: query
+    })
   }
   catch (e) {
-    console.log(e)
-    return {
-      error: "Server failed to suggest"
-    }
+    console.log(`[CASTS] Error: ${e} for query:`, query)
+    casts = { data: [] }
   }
 
   // Restructure data

@@ -4,7 +4,6 @@ import CastFeed from '../components/CastFeed'
 import Container from '../components/Container'
 import Footer from '../components/Footer'
 import Logo from '../components/Logo'
-import SearchInput from '../components/SearchInput'
 
 export default function Search({ data, query }) {
   const casts = data.casts
