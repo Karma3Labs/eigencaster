@@ -38,7 +38,8 @@ export async function searchProfiles(query) {
         proofUrl: `https://api.farcaster.xyz/v1/verified_addresses/${p.address}`,
         registeredAt: new Date(p.registered_at).getTime(),
       },
-      isFollowed: p.isFollowed,
+      youFollow: p.youFollow,
+      followsYou: p.followsYou,
       connectedAddress: p.connectedAddress,
     }
   })
