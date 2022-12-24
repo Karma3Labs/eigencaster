@@ -37,11 +37,20 @@ export default function SearchInput({ size, ...props }: SearchInputProps) {
 
     const nativeEvent = e.nativeEvent as SubmitEvent
     const target = nativeEvent.submitter?.getAttribute('name')
+    let showFollowing = true
+    if (nativeEvent.submitter !== null) {
+      const showFollowingCheckbox = nativeEvent.submitter.ownerDocument.getElementById("showFollowing") as HTMLInputElement
+      showFollowing = showFollowingCheckbox.checked
+    }
 
     const path = target == 'profiles' ? 'profiles' : 'search'
     const value = e.target!.text?.value
 
-    router.push(`/${path}?search=${value}`)
+    if (showFollowing) {
+      router.push(`/${path}?search=${value}&showFollowing=on`)
+    } else {
+      router.push(`/${path}?search=${value}`)
+    }
   }
 
   return (
@@ -55,6 +64,15 @@ export default function SearchInput({ size, ...props }: SearchInputProps) {
               defaultValue={sessionQuery?.address || ''}
               onChange={(e) => setBasicText(e.target.value)}
             />
+          </div>
+          <div style={{textAlign: "center", marginTop: "1em"}}>
+            <input
+              type="checkbox"
+              name="showFollowing"
+              id="showFollowing"
+              value="on"
+            />
+            <label htmlFor="showFollowing" style={{display: "inline-block", marginLeft: "1ex"}}>Include those who you already follow</label><br/><span style={{fontSize: "smaller", color: "grey"}}>(Works only with <b>Search profiles</b>)</span>
           </div>
           <div className="submit_buttons">
             <button type="submit" className="action_btn" name="profiles" value="lala1" >Search profiles</button>

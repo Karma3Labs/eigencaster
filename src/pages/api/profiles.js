@@ -4,18 +4,20 @@ import { isAddress } from 'ethers/lib/utils'
 export async function searchProfiles(query) {
   let profiles = { data: [] }
   console.log(query)
+  const showFollowing = 'showFollowing' in query
+  let backendQuery = {includeFollowing: showFollowing ? "on" : "off"}
   if ('search' in query) {
     if (isAddress(query.search)) {
-      query = { address: query.search }
+      backendQuery.address = query.search
     }
     else {
-      query = { username: query.search }
+      backendQuery.username = query.search
     }
   }
 
   try {
     profiles = await axios.get(`${process.env.API_URL}/suggest_profiles`, {
-      params: query
+      params: backendQuery
     })
   }
   catch (e) {

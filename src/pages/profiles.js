@@ -35,6 +35,13 @@ export default function Search({ data, query }) {
               />
               <button type="submit">{arrowIcon}</button>
             </div>
+            <input
+              type="checkbox"
+              name="showFollowing"
+              id="showFollowing"
+              value="on"
+            />
+            <label htmlFor="showFollowing" style={{display: "inline-block", marginLeft: "1ex", marginTop: "1ex"}}>Include those who you already follow</label>
           </form>
         </div>
 
