@@ -63,8 +63,8 @@ export default function Search({ data, query }) {
                       @{profile.body?.username}
                     </a>
                   </div>
-                  {profile.followsYou && <div><p className='isFollowed'>Following you</p></div>}
-                  {profile.youFollow && <div><p className='isFollowed'>You follow</p></div>}
+                  {profile.followsYou && <div><p className='isFollowed'>Follows you</p></div>}
+                  {profile.youFollow && <div><p className='isFollowed'>Following</p></div>}
                 </div>
                 <p>{profile.body?.bio}</p>
               </div>
