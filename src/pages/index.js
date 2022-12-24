@@ -32,19 +32,15 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Eigencater</title>
-        <meta
-          property="og:image"
-          content="https://searchcaster.xyz/api/og/search"
-        />
+        <title>Eigencaster</title>
         <meta
           property="og:description"
           name="description"
-          content="Search for any cast"
+          content="Farcaster recommendation"
         />
         <meta
           name="description"
-          content="Search for any cast on the Farcaster protocol."
+          content="Farcaster recommendation"
         />
       </Head>
 
