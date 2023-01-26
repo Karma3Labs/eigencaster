@@ -16,8 +16,8 @@ export function formatCasts(casts) {
         data: {
           text: text,
           image: attachment,
-          replyParentMerkleRoot: cast.replyParentMerkleRoot,
-          threadMerkleRoot: cast.threadMerkleRoot,
+          replyParentMerkleRoot: cast.replyToData?.merkleRoot || null,
+          threadMerkleRoot: cast?.threadHash || null,
         },
       },
       meta: {
@@ -43,7 +43,7 @@ export function formatCasts(casts) {
         },
         mentions: cast.mentions,
       },
-      uri: `farcaster://casts/${cast.merkleRoot}/${cast.threadMerkleRoot}`,
+      uri: `farcaster://casts/${cast.hash}/${cast.threadHash}`,
     }
   })
 }
