@@ -39,7 +39,7 @@ export function formatCasts(casts) {
           count: cast.watches || 0,
         },
         replyParentUsername: {
-          username: cast.replyParentUsername,
+          username: cast.replyParentUsername || 0,
         },
         mentions: cast.mentions,
       },

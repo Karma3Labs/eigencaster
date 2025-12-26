@@ -19,7 +19,7 @@ export default function CastFeed({ casts, query }) {
     query.page && url.replace(/page=\d+/, `page=${page - 1}`)
 
   if (casts.length === 0) {
-    return <p>No results found.</p>
+    return <div>No results found.</div>
   }
 
   return (

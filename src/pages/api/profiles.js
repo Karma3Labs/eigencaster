@@ -40,7 +40,7 @@ export async function searchProfiles(query) {
         proofUrl: `https://api.farcaster.xyz/v1/verified_addresses/${p.address}`,
         registeredAt: new Date(p.registered_at).getTime(),
       },
-      rank: p?.rank,
+      rank: p?.rank || 0,
       youFollow: p.youFollow,
       followsYou: p.followsYou,
       connectedAddress: p.connectedAddress,
